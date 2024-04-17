@@ -20,24 +20,32 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.getElementById("solveRoom3").addEventListener("click", () => {
+        //fetching direction data 
         fetch('directions.json') 
             .then(response => {
+                //check if response is successful
                 if (!response.ok) {
+                    //If not successful, throw an error
                     throw new Error('Failed to fetch directions');
-                }
+                }//if successful, parse the response as JSON
                 return response.json();
             
             })
+            //contine to next .then once JSON directions are obtained
             .then(directions => {
+                //Calling navigateLabyrinth function with the obtained directions
                 navigateLabyrinth(directions)
+                //Update room3 Results element with message if nav is successful
                     .then(message => {
                         document.getElementById("room3Result").innerHTML = message;
                     })
+                    //Catch error if there is any
                     .catch(error => {
-                        document.getElementById("room3result").innerHTML= `Navigation Error: ${error.message};`
+                        document.getElementById("room3Result").innerHTML= `Navigation Error: ${error.message};`
                     });
-            })
+            }) //Catch fetching direction errors
             .catch(error => {
+                //Display error message in thre room3Result element
                 document.getElementById("room3Result").innerHTML =`Navigation Error: ${error.message}`;
             });
     });
