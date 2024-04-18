@@ -54,13 +54,13 @@ document.addEventListener("DOMContentLoaded", () => {
 function findMostRecentBook(books) {
     return books.reduce((mostRecent, book) => new Date(book.published) >  new Date(mostRecent.published) ? book : mostRecent);
 }
-//
+//Determining the common elements between sets
 function findIntersection(setA, setB) {
     const intersection = new Set();
     setA.forEach(element => setB.has(element) ? intersection.add(element) :null);
     return intersection;
 }
-//Utilized the delay in code effectively
+//Asynchronously simulates naviagation through a series of directions.
 async function navigateLabyrinth(directions) {
     for (let direction of directions) {
         await new Promise(resolve => setTimeout(resolve, 1000));
