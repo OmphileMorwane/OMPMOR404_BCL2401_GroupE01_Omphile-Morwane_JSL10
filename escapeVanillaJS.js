@@ -50,15 +50,14 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     });
 });
-
+//Obtaining the most recent book
 function findMostRecentBook(books) {
-    // 🪲 Bug: Logic error
     return books.reduce((mostRecent, book) => new Date(book.published) >  new Date(mostRecent.published) ? book : mostRecent);
 }
-
+//
 function findIntersection(setA, setB) {
-    // 🪲 Bug: Incorrect logic
-    const intersection = new Set([...setA]);
+    const intersection = new Set();
+    setA.forEach(element => setB.has(element) ? intersection.add(element) :null);
     return intersection;
 }
 
