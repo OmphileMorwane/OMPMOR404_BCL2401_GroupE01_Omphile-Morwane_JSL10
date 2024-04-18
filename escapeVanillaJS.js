@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //Event listener for button click
     document.getElementById("solveRoom2").addEventListener("click", () => {
         //Defining a set of JavaScript concepts
-        const jsConcepts = new Set(['closure', 'scope', 'hoisting']);
+        const jsConcepts = new Set(['closure', 'scope', 'hoisting', 'async']);
         //Defining a set of React concepts
         const reactConcepts = new Set(['components', 'jsx', 'hooks', 'async']);
         //Finding the intersection of Javascript and React concepts
