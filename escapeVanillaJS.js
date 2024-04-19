@@ -1,3 +1,5 @@
+// Corrected the IDs
+// Event listener for solving Room 1, fetching book data, finding the most recent book, and displaying its title as the key for the next room
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("solveRoom1").addEventListener("click", () => {
         fetch('books.json') 
@@ -18,37 +20,17 @@ document.addEventListener("DOMContentLoaded", () => {
         //Set the text content oh an HTML element to dispplay the common concepts
         document.getElementById("room2Result").textContent = `The code to unlock the door is: ${Array.from(commonConcepts).join(', ')}`;
     });
-
-    document.getElementById("solveRoom3").addEventListener("click", () => {
-        //fetching direction data 
-        fetch('directions.json') 
-            .then(response => {
-                //check if response is successful
-                if (!response.ok) {
-                    //If not successful, throw an error
-                    throw new Error('Failed to fetch directions');
-                }//if successful, parse the response as JSON
-                return response.json();
-            
-            })
-            //contine to next .then once JSON directions are obtained
-            .then(directions => {
-                //Calling navigateLabyrinth function with the obtained directions
-                navigateLabyrinth(directions)
-                //Update room3 Results element with message if nav is successful
-                    .then(message => {
-                        document.getElementById("room3Result").innerHTML = message;
-                    })
-                    //Catch error if there is any
-                    .catch(error => {
-                        document.getElementById("room3Result").innerHTML= `Navigation Error: ${error.message};`
-                    });
-            }) //Catch fetching direction errors
-            .catch(error => {
-                //Display error message in thre room3Result element
-                document.getElementById("room3Result").innerHTML =`Navigation Error: ${error.message}`;
-            });
-    });
+//Asynchronous function using async/await to handle fetching data and updating UI after navigating the labyrinth
+    document.getElementById("solveRoom3").addEventListener("click", async () => {
+        try {
+        const response = await fetch('directions.json');
+        const directions = await response.json();
+        const message = await navigateLabyrinth(directions);
+        document.getElementById("room3Result").innerHTML = message;
+        } catch (error) {
+            console.error('Error:', error)
+        }
+    });               
 });
 //Obtaining the most recent book
 function findMostRecentBook(books) {
